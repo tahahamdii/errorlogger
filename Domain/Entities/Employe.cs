@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    internal class Employe
+    public class Employe
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Expertise { get; set; }
+        public ICollection<Error>? AssignedErrors { get; set; }
+
     }
 }

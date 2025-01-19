@@ -63,9 +63,10 @@ namespace Infrastructure.Persistence
                 .ToListAsync();
         }
 
-        public Task UpdateErrorAsync(Error error)
+        public async Task UpdateErrorAsync(Error error)
         {
-            throw new NotImplementedException();
+            _context.Errors.Update(error);
+            await _context.SaveChangesAsync();
         }
     }
 }

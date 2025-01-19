@@ -49,9 +49,9 @@ namespace Infrastructure.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public Task<Error> GetErrorByIdAsync(int id)
+        public async Task<Error> GetErrorByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Errors.Include(e => e.AssignedEmployee).FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<IEnumerable<Error>> GetErrorsAsync(DateTime? startDate, DateTime? endDate, string severity)

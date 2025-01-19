@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,31 @@ namespace Infrastructure.Persistence
         //}
 
         List<Error> IErrorRepository.GetErrors(DateTime startDate, DateTime endDate, string severity, string category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task AddErrorAsync(Error error)
+        {
+            await _context.Errors.AddAsync(error);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task<Error> GetErrorByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Error>> GetErrorsAsync(DateTime? startDate, DateTime? endDate, string severity)
+        {
+            return await _context.Errors
+                .Where(e => (startDate == null || e.Timestamp >= startDate) &&
+                            (endDate == null || e.Timestamp <= endDate) &&
+                            (string.IsNullOrEmpty(severity) || e.Severity == severity))
+                .ToListAsync();
+        }
+
+        public Task UpdateErrorAsync(Error error)
         {
             throw new NotImplementedException();
         }

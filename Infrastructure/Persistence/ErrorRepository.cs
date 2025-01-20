@@ -68,5 +68,43 @@ namespace Infrastructure.Persistence
             _context.Errors.Update(error);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<PagedResult<Error>> GetErrorsAsync(
+            DateTime? startDate, DateTime? endDate, string severity, int? assignedEmployeeId, int page, int pageSize
+            )
+        {
+            var query = _context.Errors.Include(e => e.AssignedEmployee).AsQueryable();
+
+            if (startDate.HasValue)
+                query = query.Where(e => e.Timestamp >= startDate.Value);
+
+            if (endDate.HasValue)
+                query = query.Where(e => e.Timestamp <= endDate.Value);
+
+            if (!string.IsNullOrEmpty(severity))
+                query = query.Where(e => e.Severity == severity);
+
+            if (assignedEmployeeId.HasValue)
+                query = query.Where(e => e.AssignedEmployeeId == assignedEmployeeId);
+
+            var totalCount = await query.CountAsync();
+
+            var results = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Error>
+            {
+                TotalCount = totalCount,
+                Items = results
+            };
+        }
+    }
+
+    public class PagedResult<T>
+    {
+        public int TotalCount { get; set; }
+        public List<T> Items { get; set; }
     }
 }

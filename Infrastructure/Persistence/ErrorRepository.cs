@@ -69,7 +69,7 @@ namespace Infrastructure.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<Error>> GetErrorsAsync(
+        public async Task<PagedResult<Error>> GetErrorsAsyncc(
             DateTime? startDate, DateTime? endDate, string severity, int? assignedEmployeeId, int page, int pageSize
             )
         {

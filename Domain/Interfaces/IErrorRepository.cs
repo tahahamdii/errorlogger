@@ -16,5 +16,8 @@ namespace Domain.Interfaces
         Task<Error> GetErrorByIdAsync(int id);
         Task<IEnumerable<Error>> GetErrorsAsync(DateTime? startDate, DateTime? endDate, string severity);
         Task UpdateErrorAsync(Error error);
+        Task<PagedResult<Error>> GetErrorsAsyncc(
+           DateTime? startDate, DateTime? endDate, string severity, int? assignedEmployeeId, int page, int pageSize
+           );
     }
 }

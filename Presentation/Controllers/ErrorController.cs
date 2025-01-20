@@ -1,4 +1,4 @@
-﻿using Application.UseCases.ErrorHandling;
+﻿using Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -8,7 +8,7 @@ namespace Presentation.Controllers
     public class ErrorController : ControllerBase
     {
         //private readonly AssignErrorToEmployee _assignErrorToEmployee;
-        private readonly Ge _getFilteredErrors;
+        private readonly GetFilteredErrors _getFilteredErrors;
 
         //public ErrorController(AssignErrorToEmployee assignErrorToEmployee)
         //{
@@ -32,7 +32,7 @@ namespace Presentation.Controllers
         [FromQuery] int pageSize = 10)
         {
             var result = await _getFilteredErrors.ExecuteAsync(
-                startDate, endDate, severity, assignedEmployeeId, page, pageSize);
+                (DateTime)startDate, (DateTime)endDate, severity, assignedEmployeeId, page, pageSize);
 
             return Ok(result);
         }

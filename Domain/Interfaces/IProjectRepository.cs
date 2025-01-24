@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    internal interface IProjectRepository
+    public interface IProjectRepository
     {
+        Task AddProjectAsync(Project project);
+        Task<Project> GetProjectByIdAsync(int projectId);
+        Task AssignErrorToProjectAsync(int projectId, int errorId);
     }
 }

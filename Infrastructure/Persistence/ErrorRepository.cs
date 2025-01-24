@@ -100,6 +100,11 @@ namespace Infrastructure.Persistence
                 Items = results
             };
         }
+
+        Task<Domain.Interfaces.PagedResult<Error>> IErrorRepository.GetErrorsAsyncc(DateTime? startDate, DateTime? endDate, string severity, int? assignedEmployeeId, int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class PagedResult<T>

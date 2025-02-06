@@ -7,7 +7,7 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     public class ErrorController : ControllerBase
     {
-        //private readonly AssignErrorToEmployee _assignErrorToEmployee;
+        //private readooonly AssignErrorToEmployee _assignErrorToEmployee;
         private readonly GetFilteredErrors _getFilteredErrors;
 
         //public ErrorController(AssignErrorToEmployee assignErrorToEmployee)
